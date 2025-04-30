@@ -16,10 +16,10 @@ module.exports = {
       colors: {
         background: "#F9FAFB",
         foreground: "#111827",
-        primary: "#1E40AF",
-        accent: "#6366F1",
+        primary: "#2AAB27",
+        accent: "#F8BFFF",
         negative: "#DC2626",
-        positive: "#16A34A",
+        positive: "#2AAB27",
         border: "#E5E7EB",
         muted: {
           DEFAULT: "#F3F4F6",

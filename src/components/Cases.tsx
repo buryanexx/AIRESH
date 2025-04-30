@@ -16,7 +16,7 @@ interface CaseProps {
 const Case = ({ beforeImage, afterImage, oldCtr, newCtr, ordersGrowth, category, productName, description }: CaseProps) => (
   <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
     <div className="mb-4">
-      <span className="inline-block px-3 py-1 bg-primary/5 text-primary text-sm font-medium rounded-full">
+      <span className="inline-block px-3 py-1 bg-[#F8BFFF]/10 text-[#F8BFFF] text-sm font-medium rounded-full">
         {category}
       </span>
       <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mt-2">{productName}</h3>
@@ -49,8 +49,8 @@ const Case = ({ beforeImage, afterImage, oldCtr, newCtr, ordersGrowth, category,
         <span className="text-gray-600">CTR</span>
         <div className="flex items-center space-x-2">
           <span className="text-gray-900">{oldCtr}% →</span>
-          <span className="text-positive font-medium">{newCtr}%</span>
-          <span className="text-positive text-sm bg-positive/5 px-2 py-0.5 rounded-full">
+          <span className="text-[#2AAB27] font-medium">{newCtr}%</span>
+          <span className="text-[#2AAB27] text-sm bg-[#2AAB27]/10 px-2 py-0.5 rounded-full">
             (+{((newCtr - oldCtr) / oldCtr * 100).toFixed(0)}%)
           </span>
         </div>
@@ -59,8 +59,8 @@ const Case = ({ beforeImage, afterImage, oldCtr, newCtr, ordersGrowth, category,
       <div className="flex items-center justify-between">
         <span className="text-gray-600">Рост заказов</span>
         <div className="flex items-center space-x-2">
-          <span className="text-positive font-medium">в {ordersGrowth} раза</span>
-          <span className="text-positive text-sm bg-positive/5 px-2 py-0.5 rounded-full">
+          <span className="text-[#2AAB27] font-medium">в {ordersGrowth} раза</span>
+          <span className="text-[#2AAB27] text-sm bg-[#2AAB27]/10 px-2 py-0.5 rounded-full">
             (+{((ordersGrowth - 1) * 100).toFixed(0)}%)
           </span>
         </div>
@@ -116,7 +116,7 @@ export const Cases = () => {
           className="text-center mb-8"
         >
           <h2 className="text-2xl font-semibold text-gray-900">
-            Наши кейсы
+            📸 Наши кейсы
           </h2>
           <p className="text-gray-600 mt-2">
             Реальные примеры того, как ИИ-фотосессия улучшает показатели карточек товаров
@@ -140,9 +140,9 @@ export const Cases = () => {
           whileHover={{ scale: 1.01 }}
           whileTap={{ scale: 0.99 }}
           onClick={() => WebApp.close()}
-          className="w-full bg-primary text-white text-lg font-medium px-6 py-4 rounded-xl shadow-sm hover:bg-opacity-90 transition-all mt-8"
+          className="w-full bg-[#2AAB27] text-white text-lg font-medium px-6 py-4 rounded-xl shadow-sm hover:bg-opacity-90 transition-all mt-8"
         >
-          Вернуться к боту
+          ← Вернуться к боту
         </motion.button>
       </div>
       <GetPhotoshootButton />

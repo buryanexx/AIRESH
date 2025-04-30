@@ -108,21 +108,13 @@ export const Calculator = () => {
       className="min-h-screen bg-gray-50 p-4 pb-20"
     >
       <div className="max-w-lg mx-auto">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-2xl font-semibold text-gray-900 mb-6 text-center"
-        >
-          Калькулятор эффективности ИИ-фотосессии
-        </motion.h2>
-
         <div className="bg-white rounded-xl shadow-sm p-4 mb-6">
           <div className="space-y-6">
             {/* Показы */}
             <div>
               <div className="flex flex-col space-y-1">
                 <label className="block text-base font-medium text-gray-700">
-                  Количество показов — сколько трафика?
+                  📊 Количество показов
                 </label>
                 <span className="text-sm text-gray-500">
                   Введите среднее количество показов ваших товаров
@@ -142,10 +134,10 @@ export const Calculator = () => {
                 step={2000}
               >
                 <Slider.Track className="bg-gray-100 relative grow rounded-full h-2">
-                  <Slider.Range className="absolute h-full rounded-full bg-primary/90" />
+                  <Slider.Range className="absolute h-full rounded-full bg-[#2AAB27]" />
                 </Slider.Track>
                 <Slider.Thumb
-                  className="block w-5 h-5 bg-white rounded-full shadow-sm border border-primary/20 focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  className="block w-5 h-5 bg-white rounded-full shadow-sm border border-[#2AAB27] focus:outline-none focus:ring-2 focus:ring-[#2AAB27]/20"
                   aria-label="Показы"
                 />
               </Slider.Root>
@@ -155,7 +147,7 @@ export const Calculator = () => {
             <div>
               <div className="flex justify-between items-center mb-2">
                 <label className="text-base font-medium text-gray-700">
-                  Текущий CTR
+                  📈 Текущий CTR
                 </label>
                 <span className="text-base font-medium text-gray-900">
                   {currentCtr.toFixed(1)}%
@@ -170,10 +162,10 @@ export const Calculator = () => {
                 step={0.1}
               >
                 <Slider.Track className="bg-gray-100 relative grow rounded-full h-2">
-                  <Slider.Range className="absolute h-full rounded-full bg-primary/90" />
+                  <Slider.Range className="absolute h-full rounded-full bg-[#2AAB27]" />
                 </Slider.Track>
                 <Slider.Thumb
-                  className="block w-5 h-5 bg-white rounded-full shadow-sm border border-primary/20 focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  className="block w-5 h-5 bg-white rounded-full shadow-sm border border-[#2AAB27] focus:outline-none focus:ring-2 focus:ring-[#2AAB27]/20"
                   aria-label="Текущий CTR"
                 />
               </Slider.Root>
@@ -181,25 +173,26 @@ export const Calculator = () => {
 
             {/* Потенциальный CTR */}
             <div>
-              <div className="flex justify-between items-center mb-2">
-                <label className="text-base font-medium text-gray-700">
-                  Потенциальный CTR с ИИ
-                </label>
-                <div className="flex items-center space-x-2">
-                  <span className={`text-base font-medium ${
-                    newCtr > currentCtr ? 'text-positive' : 'text-negative'
-                  }`}>
-                    {newCtr.toFixed(1)}%
-                  </span>
-                  <span className={`text-sm px-2 py-0.5 rounded-full ${
-                    newCtr > currentCtr ? 'text-positive bg-positive/5' : 'text-negative bg-negative/5'
-                  }`}>
-                    {formatPercentage((newCtr - currentCtr) / currentCtr * 100)}
-                  </span>
+              <div className="flex flex-col space-y-2">
+                <div className="flex justify-between items-center">
+                  <label className="text-base font-medium text-gray-700">
+                    🎯 Потенциальный CTR с ИИ
+                  </label>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-base font-medium text-[#2AAB27]">
+                      {newCtr.toFixed(1)}%
+                    </span>
+                    <span className="text-sm px-2 py-0.5 rounded-full bg-[#2AAB27]/10 text-[#2AAB27]">
+                      {formatPercentage((newCtr - currentCtr) / currentCtr * 100)}
+                    </span>
+                  </div>
                 </div>
+                <span className="text-sm text-gray-500">
+                  {newCtr.toFixed(1)}% от показов
+                </span>
               </div>
               <Slider.Root
-                className="relative flex items-center select-none touch-none w-full h-5 mb-4"
+                className="relative flex items-center select-none touch-none w-full h-5 mb-4 mt-2"
                 value={[newCtr]}
                 onValueChange={([value]) => setNewCtr(value)}
                 max={13.37}
@@ -207,16 +200,10 @@ export const Calculator = () => {
                 step={0.1}
               >
                 <Slider.Track className="bg-gray-100 relative grow rounded-full h-2">
-                  <Slider.Range className={`absolute h-full rounded-full ${
-                    newCtr > currentCtr ? 'bg-positive/90' : 'bg-negative/90'
-                  }`} />
+                  <Slider.Range className="absolute h-full rounded-full bg-[#2AAB27]" />
                 </Slider.Track>
                 <Slider.Thumb
-                  className={`block w-5 h-5 bg-white rounded-full shadow-sm border focus:outline-none focus:ring-2 ${
-                    newCtr > currentCtr 
-                      ? 'border-positive/20 focus:ring-positive/20' 
-                      : 'border-negative/20 focus:ring-negative/20'
-                  }`}
+                  className="block w-5 h-5 bg-white rounded-full shadow-sm border border-[#2AAB27] focus:outline-none focus:ring-2 focus:ring-[#2AAB27]/20"
                   aria-label="CTR"
                 />
               </Slider.Root>
@@ -226,7 +213,7 @@ export const Calculator = () => {
             <div className="space-y-3 mt-8">
               <MetricCard
                 icon={
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg className="w-5 h-5 text-[#F8BFFF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M7 16l-4-4m0 0l4-4m-4 4h18" />
                   </svg>
                 }
@@ -238,7 +225,7 @@ export const Calculator = () => {
 
               <MetricCard
                 icon={
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg className="w-5 h-5 text-[#F8BFFF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
                 }
@@ -250,7 +237,7 @@ export const Calculator = () => {
 
               <MetricCard
                 icon={
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg className="w-5 h-5 text-[#F8BFFF]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 }
@@ -266,7 +253,7 @@ export const Calculator = () => {
               <div>
                 <div className="flex justify-between items-center mb-2">
                   <label className="text-base font-medium text-gray-700">
-                    Конверсия в корзину
+                    🛒 Конверсия в корзину
                   </label>
                   <span className="text-base font-medium text-gray-900">
                     {cartRate}%
@@ -281,10 +268,10 @@ export const Calculator = () => {
                   step={1}
                 >
                   <Slider.Track className="bg-gray-100 relative grow rounded-full h-2">
-                    <Slider.Range className="absolute h-full rounded-full bg-primary/90" />
+                    <Slider.Range className="absolute h-full rounded-full bg-[#2AAB27]" />
                   </Slider.Track>
                   <Slider.Thumb
-                    className="block w-5 h-5 bg-white rounded-full shadow-sm border border-primary/20 focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    className="block w-5 h-5 bg-white rounded-full shadow-sm border border-[#2AAB27] focus:outline-none focus:ring-2 focus:ring-[#2AAB27]/20"
                     aria-label="Конверсия в корзину"
                   />
                 </Slider.Root>
@@ -293,7 +280,7 @@ export const Calculator = () => {
               <div>
                 <div className="flex justify-between items-center mb-2">
                   <label className="text-base font-medium text-gray-700">
-                    Конверсия в заказ
+                    ✨ Конверсия в заказ
                   </label>
                   <span className="text-base font-medium text-gray-900">
                     {orderRate}%
@@ -308,10 +295,10 @@ export const Calculator = () => {
                   step={1}
                 >
                   <Slider.Track className="bg-gray-100 relative grow rounded-full h-2">
-                    <Slider.Range className="absolute h-full rounded-full bg-primary/90" />
+                    <Slider.Range className="absolute h-full rounded-full bg-[#2AAB27]" />
                   </Slider.Track>
                   <Slider.Thumb
-                    className="block w-5 h-5 bg-white rounded-full shadow-sm border border-primary/20 focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    className="block w-5 h-5 bg-white rounded-full shadow-sm border border-[#2AAB27] focus:outline-none focus:ring-2 focus:ring-[#2AAB27]/20"
                     aria-label="Конверсия в заказ"
                   />
                 </Slider.Root>
@@ -323,49 +310,36 @@ export const Calculator = () => {
         {/* Результаты */}
         <div className="bg-white rounded-xl shadow-sm p-4 mb-6">
           <h3 className="text-lg font-medium text-gray-900 mb-4">
-            Результаты расчета
+            📊 Результаты расчета
           </h3>
           <div className="space-y-3">
             <div className="flex items-center justify-between p-3 bg-gray-50/50 rounded-lg">
               <span className="text-gray-600">Рост CTR</span>
-              <span className={`text-lg font-medium ${ctrGrowth > 0 ? 'text-positive' : 'text-negative'}`}>
+              <span className="text-lg font-medium text-[#2AAB27]">
                 в {(1 + ctrGrowth).toFixed(2)} раза
               </span>
             </div>
             <div className="flex items-center justify-between p-3 bg-gray-50/50 rounded-lg">
               <span className="text-gray-600">Прирост заказов</span>
-              <span className={`text-lg font-medium ${ordersGrowthFromCurrent > 0 ? 'text-positive' : 'text-negative'}`}>
+              <span className="text-lg font-medium text-[#2AAB27]">
                 {formatPercentage(ordersGrowthFromCurrent)}
               </span>
             </div>
           </div>
         </div>
 
-        <div className="space-y-3">
-          <motion.button
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.99 }}
-            onClick={handleSubmit}
-            disabled={isSubmitting}
-            className={`w-full bg-primary text-white text-lg font-medium px-6 py-4 rounded-xl shadow-sm transition-all ${
-              isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-opacity-90'
-            }`}
-          >
-            {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
-          </motion.button>
-
-          <Link to="/cases" className="block">
-            <motion.button
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.99 }}
-              className="w-full bg-white text-primary text-lg font-medium px-6 py-4 rounded-xl shadow-sm hover:bg-gray-50 transition-all"
-            >
-              Посмотреть кейсы
-            </motion.button>
-          </Link>
-        </div>
+        <motion.button
+          whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.99 }}
+          onClick={handleSubmit}
+          disabled={isSubmitting}
+          className={`w-full bg-[#2AAB27] text-white text-lg font-medium px-6 py-4 rounded-xl shadow-sm transition-all ${
+            isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-opacity-90'
+          }`}
+        >
+          {isSubmitting ? 'Отправка...' : '📸 Получить фотосессию'}
+        </motion.button>
       </div>
-      <GetPhotoshootButton />
     </motion.div>
   );
 }; 
