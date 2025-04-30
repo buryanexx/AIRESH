@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import WebApp from '@twa-dev/sdk';
+import { GetPhotoshootButton } from './GetPhotoshootButton';
 
 interface CaseProps {
   beforeImage: string;
@@ -106,7 +107,7 @@ export const Cases = () => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="min-h-screen bg-gray-50 p-4"
+      className="min-h-screen bg-gray-50 p-4 pb-20"
     >
       <div className="max-w-2xl mx-auto">
         <motion.div
@@ -144,6 +145,7 @@ export const Cases = () => {
           Вернуться к боту
         </motion.button>
       </div>
+      <GetPhotoshootButton />
     </motion.div>
   );
 }; 

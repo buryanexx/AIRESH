@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Calculator } from './components/Calculator';
 import { Cases } from './components/Cases';
+import { Payment } from './components/Payment';
 import WebApp from '@twa-dev/sdk';
 import { useEffect } from 'react';
 import './App.css';
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Calculator />} />
           <Route path="/cases" element={<Cases />} />
+          <Route path="/payment" element={<Payment />} />
         </Routes>
       </div>
     </Router>

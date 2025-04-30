@@ -3,6 +3,7 @@ import { useState } from 'react';
 import * as Slider from '@radix-ui/react-slider';
 import { Link } from 'react-router-dom';
 import WebApp from '@twa-dev/sdk';
+import { GetPhotoshootButton } from './GetPhotoshootButton';
 
 export const Calculator = () => {
   const [impressions, setImpressions] = useState(20000);
@@ -80,7 +81,7 @@ export const Calculator = () => {
     subtext?: string;
   }) => (
     <div className="bg-white rounded-xl p-4 flex items-start space-x-3">
-      <div className="w-8 h-8 rounded-lg bg-primary/5 flex items-center justify-center flex-shrink-0">
+      <div className="w-8 h-8 rounded-lg bg-[#F8BFFF] bg-opacity-10 flex items-center justify-center flex-shrink-0">
         {icon}
       </div>
       <div className="flex-1">
@@ -89,7 +90,7 @@ export const Calculator = () => {
           <span className="text-2xl font-medium">{value}</span>
           {change !== undefined && (
             <span className={`px-2 py-0.5 text-sm font-medium rounded-full ${
-              change >= 0 ? 'text-positive bg-positive/5' : 'text-negative bg-negative/5'
+              change >= 0 ? 'text-[#2AAB27] bg-[#2AAB27]/5' : 'text-negative bg-negative/5'
             }`}>
               {formatPercentage(change)}
             </span>
@@ -104,7 +105,7 @@ export const Calculator = () => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="min-h-screen bg-gray-50 p-4"
+      className="min-h-screen bg-gray-50 p-4 pb-20"
     >
       <div className="max-w-lg mx-auto">
         <motion.h2
@@ -364,6 +365,7 @@ export const Calculator = () => {
           </Link>
         </div>
       </div>
+      <GetPhotoshootButton />
     </motion.div>
   );
 }; 
