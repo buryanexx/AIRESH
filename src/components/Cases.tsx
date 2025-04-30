@@ -15,7 +15,7 @@ interface CaseProps {
 const Case = ({ beforeImage, afterImage, oldCtr, newCtr, ordersGrowth, category, productName, description }: CaseProps) => (
   <div className="bg-white rounded-xl p-4 sm:p-6 shadow-sm">
     <div className="mb-4">
-      <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full">
+      <span className="inline-block px-3 py-1 bg-primary/5 text-primary text-sm font-medium rounded-full">
         {category}
       </span>
       <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mt-2">{productName}</h3>
@@ -23,23 +23,33 @@ const Case = ({ beforeImage, afterImage, oldCtr, newCtr, ordersGrowth, category,
     </div>
     
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-      <div>
-        <p className="text-center text-gray-600 mb-2">До</p>
-        <img src={beforeImage} alt="До" className="w-full h-[200px] sm:h-[300px] object-cover rounded-lg" />
+      <div className="relative aspect-[3/4] bg-gray-50 rounded-lg overflow-hidden">
+        <p className="absolute top-2 left-2 text-sm font-medium text-gray-500 bg-white/80 px-2 py-1 rounded-full">До</p>
+        <img 
+          src={beforeImage} 
+          alt="До" 
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
       </div>
-      <div>
-        <p className="text-center text-gray-600 mb-2">После</p>
-        <img src={afterImage} alt="После" className="w-full h-[200px] sm:h-[300px] object-cover rounded-lg" />
+      <div className="relative aspect-[3/4] bg-gray-50 rounded-lg overflow-hidden">
+        <p className="absolute top-2 left-2 text-sm font-medium text-gray-500 bg-white/80 px-2 py-1 rounded-full">После</p>
+        <img 
+          src={afterImage} 
+          alt="После" 
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
       </div>
     </div>
 
-    <div className="space-y-3 bg-gray-50 p-4 rounded-lg">
+    <div className="space-y-3 bg-gray-50/50 p-4 rounded-lg">
       <div className="flex items-center justify-between">
         <span className="text-gray-600">CTR</span>
         <div className="flex items-center space-x-2">
           <span className="text-gray-900">{oldCtr}% →</span>
           <span className="text-positive font-medium">{newCtr}%</span>
-          <span className="text-positive text-sm">
+          <span className="text-positive text-sm bg-positive/5 px-2 py-0.5 rounded-full">
             (+{((newCtr - oldCtr) / oldCtr * 100).toFixed(0)}%)
           </span>
         </div>
@@ -49,7 +59,7 @@ const Case = ({ beforeImage, afterImage, oldCtr, newCtr, ordersGrowth, category,
         <span className="text-gray-600">Рост заказов</span>
         <div className="flex items-center space-x-2">
           <span className="text-positive font-medium">в {ordersGrowth} раза</span>
-          <span className="text-positive text-sm">
+          <span className="text-positive text-sm bg-positive/5 px-2 py-0.5 rounded-full">
             (+{((ordersGrowth - 1) * 100).toFixed(0)}%)
           </span>
         </div>
@@ -112,13 +122,13 @@ export const Cases = () => {
           </p>
         </motion.div>
 
-        <div className="space-y-8">
+        <div className="space-y-6">
           {cases.map((caseItem, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 }}
+              transition={{ delay: index * 0.1 }}
             >
               <Case {...caseItem} />
             </motion.div>
@@ -126,10 +136,10 @@ export const Cases = () => {
         </div>
 
         <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+          whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.99 }}
           onClick={() => WebApp.close()}
-          className="w-full bg-primary text-white text-lg font-semibold px-6 py-4 rounded-xl shadow-lg hover:bg-opacity-90 transition-all mt-8"
+          className="w-full bg-primary text-white text-lg font-medium px-6 py-4 rounded-xl shadow-sm hover:bg-opacity-90 transition-all mt-8"
         >
           Вернуться к боту
         </motion.button>
