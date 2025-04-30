@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import * as Slider from '@radix-ui/react-slider';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import WebApp from '@twa-dev/sdk';
 import { GetPhotoshootButton } from './GetPhotoshootButton';
 
 export const Calculator = () => {
+  const navigate = useNavigate();
   const [impressions, setImpressions] = useState(20000);
   const [currentCtr, setCurrentCtr] = useState(3.3);
   const [newCtr, setNewCtr] = useState(5.9);
@@ -33,44 +34,9 @@ export const Calculator = () => {
     return `${sign}${value.toFixed(0)}%`;
   };
 
-  // Функция отправки данных в бота
-  const handleSubmit = async () => {
-    try {
-      setIsSubmitting(true);
-      
-      const data = {
-        impressions,
-        currentCtr,
-        newCtr,
-        cartRate,
-        orderRate,
-        currentClicks,
-        newClicks,
-        currentCarts,
-        newCarts,
-        currentOrders,
-        newOrders,
-        ctrGrowth: ctrGrowth * 100,
-        ordersGrowth: ordersGrowthFromCurrent
-      };
-
-      await WebApp.sendData(JSON.stringify(data));
-      
-      WebApp.showPopup({
-        title: 'Успешно!',
-        message: 'Ваши данные отправлены. Наш менеджер свяжется с вами в ближайшее время.',
-        buttons: [{ type: 'ok' }]
-      });
-    } catch (error) {
-      console.error('Ошибка при отправке данных:', error);
-      WebApp.showPopup({
-        title: 'Ошибка',
-        message: 'Произошла ошибка при отправке данных. Пожалуйста, попробуйте позже.',
-        buttons: [{ type: 'ok' }]
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+  // Обновляем обработчик для перехода на страницу оплаты
+  const handleSubmit = () => {
+    navigate('/payment');
   };
 
   const MetricCard = ({ icon, label, value, change, subtext }: {
@@ -358,12 +324,9 @@ export const Calculator = () => {
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
             onClick={handleSubmit}
-            disabled={isSubmitting}
-            className={`w-full bg-primary text-white text-lg font-medium px-6 py-4 rounded-xl shadow-sm transition-all ${
-              isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-opacity-90'
-            }`}
+            className="w-full bg-primary text-white text-lg font-medium px-6 py-4 rounded-xl shadow-sm hover:bg-opacity-90 transition-all"
           >
-            {isSubmitting ? 'Отправка...' : 'Получить фотосессию'}
+            Получить фотосессию
           </motion.button>
 
           <Link to="/cases" className="block">
