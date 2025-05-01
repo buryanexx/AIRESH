@@ -1,11 +1,46 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import WebApp from '@twa-dev/sdk';
+import { useState } from 'react';
+
+// Варианты пакетов фотографий
+const PHOTO_PACKAGES = [
+  {
+    id: '2photos',
+    count: 2,
+    title: '2 фото',
+    description: 'для анализа главной фотографии (разный или единый стиль)',
+    price: 7990
+  },
+  {
+    id: '4photos',
+    count: 4,
+    title: '4 фото',
+    description: 'для анализа главной фотографии и воронки (единый стиль)',
+    price: 10990
+  },
+  {
+    id: '8photos',
+    count: 8,
+    title: '8 фото',
+    description: 'полноценная фотосессия (единый стиль)',
+    price: 14990
+  }
+];
 
 export const Payment = () => {
   const navigate = useNavigate();
+  const [selectedPackage, setSelectedPackage] = useState(PHOTO_PACKAGES[0]);
 
   const handlePayment = () => {
+    // Отправка данных в бот
+    WebApp.sendData(JSON.stringify({
+      action: 'order',
+      package: selectedPackage.id,
+      photoCount: selectedPackage.count,
+      price: selectedPackage.price
+    }));
+    
     WebApp.showPopup({
       title: 'Оплата',
       message: 'Для оплаты вы будете перенаправлены на защищенную страницу',
@@ -76,20 +111,6 @@ export const Payment = () => {
 
               <div className="bg-gray-50 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-start space-x-3">
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-900">12 фотографий</p>
-                    <p className="text-sm text-gray-600">в разных позах и ракурсах</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-gray-50 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow">
-                <div className="flex items-start space-x-3">
                   <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
                     <svg className="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -104,10 +125,45 @@ export const Payment = () => {
             </div>
           </div>
 
+          {/* Выбор пакета фотографий */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Выберите количество фотографий</h3>
+            <div className="space-y-3">
+              {PHOTO_PACKAGES.map((pkg) => (
+                <div 
+                  key={pkg.id}
+                  onClick={() => setSelectedPackage(pkg)}
+                  className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
+                    selectedPackage.id === pkg.id 
+                      ? 'border-primary bg-primary/5' 
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <div className="flex items-center">
+                    <div className={`w-5 h-5 rounded-full border-2 mr-3 flex-shrink-0 ${
+                      selectedPackage.id === pkg.id 
+                        ? 'border-primary' 
+                        : 'border-gray-400'
+                    }`}>
+                      {selectedPackage.id === pkg.id && (
+                        <div className="w-3 h-3 bg-primary rounded-full m-auto" />
+                      )}
+                    </div>
+                    <div>
+                      <div className="font-medium text-gray-900">{pkg.title}</div>
+                      <div className="text-sm text-gray-600">{pkg.description}</div>
+                      <div className="text-primary font-semibold mt-1">{pkg.price.toLocaleString()} ₽</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Цена и кнопка */}
           <div className="bg-gray-50 rounded-xl p-6 shadow-md">
             <div className="text-center mb-6">
-              <span className="text-4xl font-bold text-gray-900 block">9 990 ₽</span>
+              <span className="text-4xl font-bold text-gray-900 block">{selectedPackage.price.toLocaleString()} ₽</span>
             </div>
 
             <motion.button
@@ -120,7 +176,7 @@ export const Payment = () => {
             </motion.button>
             
             <div className="text-center">
-              <span className="text-sm text-gray-500">цена за артикул (12 фото)</span>
+              <span className="text-sm text-gray-500">цена за артикул ({selectedPackage.count} фото)</span>
             </div>
           </div>
         </div>
