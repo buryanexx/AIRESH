@@ -12,8 +12,7 @@ export const Payment = () => {
       buttons: [
         {
           id: 'pay',
-          type: 'ok',
-          text: 'Продолжить'
+          type: 'ok'
         }
       ]
     });
@@ -107,21 +106,22 @@ export const Payment = () => {
 
           {/* Цена и кнопка */}
           <div className="bg-gray-50 rounded-xl p-6 shadow-md">
-            <div className="flex items-baseline justify-between mb-4">
-              <span className="text-lg text-gray-600">Стоимость за артикул</span>
-              <div className="text-right">
-                <span className="text-3xl font-bold text-gray-900">9 990 ₽</span>
-              </div>
+            <div className="text-center mb-6">
+              <span className="text-4xl font-bold text-gray-900 block">9 990 ₽</span>
             </div>
 
             <motion.button
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.99 }}
               onClick={handlePayment}
-              className="w-full bg-primary text-white text-lg font-medium px-6 py-4 rounded-xl shadow-lg hover:bg-opacity-90 transition-all"
+              className="w-full bg-primary text-white text-lg font-medium px-6 py-4 rounded-xl shadow-lg hover:bg-opacity-90 transition-all mb-3"
             >
-              Оплатить
+              Заказать
             </motion.button>
+            
+            <div className="text-center">
+              <span className="text-sm text-gray-500">цена за артикул (12 фото)</span>
+            </div>
           </div>
         </div>
 
