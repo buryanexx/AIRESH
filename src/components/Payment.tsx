@@ -8,23 +8,26 @@ const PHOTO_PACKAGES = [
   {
     id: '2photos',
     count: 2,
-    title: '2 фото',
+    title: '2 фотографии',
     description: 'для анализа главной фотографии (разный или единый стиль)',
-    price: 7990
+    price: 7990,
+    badge: 'Популярный'
   },
   {
     id: '4photos',
     count: 4,
-    title: '4 фото',
+    title: '4 фотографии',
     description: 'для анализа главной фотографии и воронки (единый стиль)',
-    price: 10990
+    price: 10990,
+    badge: 'Оптимальный'
   },
   {
     id: '8photos',
     count: 8,
-    title: '8 фото',
+    title: '8 фотографий',
     description: 'полноценная фотосессия (единый стиль)',
-    price: 14990
+    price: 14990,
+    badge: 'Максимальный'
   }
 ];
 
@@ -74,9 +77,11 @@ export const Payment = () => {
         </motion.button>
 
         <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-8">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-4 text-center">
             ИИ-фотосессия для вашего бизнеса
           </h2>
+          
+          <p className="text-center text-gray-600 mb-8">Увеличьте продажи с помощью профессиональных фотографий</p>
           
           {/* Преимущества */}
           <div className="space-y-6 mb-8">
@@ -127,32 +132,43 @@ export const Payment = () => {
 
           {/* Выбор пакета фотографий */}
           <div className="mb-8">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Выберите количество фотографий</h3>
-            <div className="space-y-3">
+            <h3 className="text-xl font-bold text-center text-gray-900 mb-5">Выберите количество фотографий</h3>
+            <div className="space-y-4">
               {PHOTO_PACKAGES.map((pkg) => (
                 <div 
                   key={pkg.id}
                   onClick={() => setSelectedPackage(pkg)}
-                  className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
+                  className={`p-5 rounded-lg border-2 cursor-pointer transition-all ${
                     selectedPackage.id === pkg.id 
-                      ? 'border-primary bg-primary/5' 
+                      ? 'border-primary bg-primary/5 shadow-md' 
                       : 'border-gray-200 hover:border-gray-300'
                   }`}
                 >
                   <div className="flex items-center">
-                    <div className={`w-5 h-5 rounded-full border-2 mr-3 flex-shrink-0 ${
-                      selectedPackage.id === pkg.id 
-                        ? 'border-primary' 
-                        : 'border-gray-400'
-                    }`}>
-                      {selectedPackage.id === pkg.id && (
-                        <div className="w-3 h-3 bg-primary rounded-full m-auto" />
-                      )}
+                    <div className="flex items-center justify-center mr-4">
+                      <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+                        selectedPackage.id === pkg.id 
+                          ? 'border-primary' 
+                          : 'border-gray-400'
+                      }`}>
+                        {selectedPackage.id === pkg.id && (
+                          <div className="w-3.5 h-3.5 bg-primary rounded-full" />
+                        )}
+                      </div>
                     </div>
-                    <div>
-                      <div className="font-medium text-gray-900">{pkg.title}</div>
-                      <div className="text-sm text-gray-600">{pkg.description}</div>
-                      <div className="text-primary font-semibold mt-1">{pkg.price.toLocaleString()} ₽</div>
+                    <div className="flex-1">
+                      <div className="flex justify-between items-center">
+                        <span className="text-lg font-bold text-gray-900">{pkg.title}</span>
+                        {pkg.badge && (
+                          <span className={`text-xs font-medium px-2 py-1 rounded-full ${
+                            selectedPackage.id === pkg.id ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600'
+                          }`}>
+                            {pkg.badge}
+                          </span>
+                        )}
+                      </div>
+                      <div className="text-sm text-gray-600 mt-1">{pkg.description}</div>
+                      <div className="text-primary font-bold text-lg mt-2">{pkg.price.toLocaleString()} ₽</div>
                     </div>
                   </div>
                 </div>
@@ -162,6 +178,9 @@ export const Payment = () => {
 
           {/* Цена и кнопка */}
           <div className="bg-gray-50 rounded-xl p-6 shadow-md">
+            <div className="text-center mb-2">
+              <span className="text-sm font-medium text-gray-500">Итоговая стоимость:</span>
+            </div>
             <div className="text-center mb-6">
               <span className="text-4xl font-bold text-gray-900 block">{selectedPackage.price.toLocaleString()} ₽</span>
             </div>
@@ -170,13 +189,13 @@ export const Payment = () => {
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.99 }}
               onClick={handlePayment}
-              className="w-full bg-primary text-white text-lg font-medium px-6 py-4 rounded-xl shadow-lg hover:bg-opacity-90 transition-all mb-3"
+              className="w-full bg-primary text-white text-lg font-bold px-6 py-4 rounded-xl shadow-lg hover:bg-opacity-90 transition-all mb-3"
             >
               Заказать
             </motion.button>
             
             <div className="text-center">
-              <span className="text-sm text-gray-500">цена за артикул ({selectedPackage.count} фото)</span>
+              <span className="text-sm text-gray-500">цена за артикул ({selectedPackage.count} фотографии)</span>
             </div>
           </div>
         </div>
