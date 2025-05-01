@@ -19,7 +19,7 @@ const PHOTO_PACKAGES = [
     title: '4 фотографии',
     description: 'для анализа главной фотографии и воронки (единый стиль)',
     price: 10990,
-    badge: 'Оптимальный'
+    badge: ''
   },
   {
     id: '8photos',
@@ -27,7 +27,7 @@ const PHOTO_PACKAGES = [
     title: '8 фотографий',
     description: 'полноценная фотосессия (единый стиль)',
     price: 14990,
-    badge: 'Максимальный'
+    badge: ''
   }
 ];
 
@@ -133,42 +133,42 @@ export const Payment = () => {
           {/* Выбор пакета фотографий */}
           <div className="mb-8">
             <h3 className="text-xl font-bold text-center text-gray-900 mb-5">Выберите количество фотографий</h3>
-            <div className="space-y-4">
+            <div className="space-y-3">
               {PHOTO_PACKAGES.map((pkg) => (
                 <div 
                   key={pkg.id}
                   onClick={() => setSelectedPackage(pkg)}
-                  className={`p-5 rounded-lg border-2 cursor-pointer transition-all ${
+                  className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
                     selectedPackage.id === pkg.id 
                       ? 'border-primary bg-primary/5 shadow-md' 
                       : 'border-gray-200 hover:border-gray-300'
                   }`}
                 >
                   <div className="flex items-center">
-                    <div className="flex items-center justify-center mr-4">
-                      <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+                    <div className="flex items-center justify-center mr-3">
+                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
                         selectedPackage.id === pkg.id 
                           ? 'border-primary' 
                           : 'border-gray-400'
                       }`}>
                         {selectedPackage.id === pkg.id && (
-                          <div className="w-3.5 h-3.5 bg-primary rounded-full" />
+                          <div className="w-3 h-3 bg-primary rounded-full" />
                         )}
                       </div>
                     </div>
                     <div className="flex-1">
                       <div className="flex justify-between items-center">
-                        <span className="text-lg font-bold text-gray-900">{pkg.title}</span>
+                        <span className="text-base font-bold text-gray-900">{pkg.title}</span>
                         {pkg.badge && (
-                          <span className={`text-xs font-medium px-2 py-1 rounded-full ${
+                          <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
                             selectedPackage.id === pkg.id ? 'bg-primary text-white' : 'bg-gray-100 text-gray-600'
                           }`}>
                             {pkg.badge}
                           </span>
                         )}
                       </div>
-                      <div className="text-sm text-gray-600 mt-1">{pkg.description}</div>
-                      <div className="text-primary font-bold text-lg mt-2">{pkg.price.toLocaleString()} ₽</div>
+                      <div className="text-xs text-gray-600 mt-1">{pkg.description}</div>
+                      <div className="text-primary font-bold text-base mt-1">{pkg.price.toLocaleString()} ₽</div>
                     </div>
                   </div>
                 </div>
@@ -177,25 +177,25 @@ export const Payment = () => {
           </div>
 
           {/* Цена и кнопка */}
-          <div className="bg-gray-50 rounded-xl p-6 shadow-md">
+          <div className="bg-gray-50 rounded-xl p-5 shadow-md">
             <div className="text-center mb-2">
               <span className="text-sm font-medium text-gray-500">Итоговая стоимость:</span>
             </div>
-            <div className="text-center mb-6">
-              <span className="text-4xl font-bold text-gray-900 block">{selectedPackage.price.toLocaleString()} ₽</span>
+            <div className="text-center mb-5">
+              <span className="text-3xl font-bold text-gray-900 block">{selectedPackage.price.toLocaleString()} ₽</span>
             </div>
 
             <motion.button
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.99 }}
               onClick={handlePayment}
-              className="w-full bg-primary text-white text-lg font-bold px-6 py-4 rounded-xl shadow-lg hover:bg-opacity-90 transition-all mb-3"
+              className="w-full bg-primary text-white text-lg font-bold px-6 py-3 rounded-xl shadow-lg hover:bg-opacity-90 transition-all mb-3"
             >
               Заказать
             </motion.button>
             
             <div className="text-center">
-              <span className="text-sm text-gray-500">цена за артикул ({selectedPackage.count} фотографии)</span>
+              <span className="text-xs text-gray-500">цена за артикул ({selectedPackage.count} фотографии)</span>
             </div>
           </div>
         </div>
