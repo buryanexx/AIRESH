@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import WebApp from '@twa-dev/sdk';
 import { GetPhotoshootButton } from './GetPhotoshootButton';
+import { useNavigate } from 'react-router-dom';
 
 interface CaseProps {
   beforeImage: string;
@@ -103,11 +104,13 @@ export const Cases = () => {
     }
   ];
 
+  const navigate = useNavigate();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="min-h-screen bg-gray-50 p-4 pb-20"
+      className="min-h-screen bg-gray-50 p-4 pb-24"
     >
       <div className="max-w-2xl mx-auto">
         <motion.div
@@ -116,7 +119,7 @@ export const Cases = () => {
           className="text-center mb-8"
         >
           <h2 className="text-2xl font-semibold text-gray-900">
-            📸 Наши кейсы
+            Наши кейсы
           </h2>
           <p className="text-gray-600 mt-2">
             Реальные примеры того, как ИИ-фотосессия улучшает показатели карточек товаров
@@ -130,6 +133,7 @@ export const Cases = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
+              className="shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               <Case {...caseItem} />
             </motion.div>
@@ -139,13 +143,26 @@ export const Cases = () => {
         <motion.button
           whileHover={{ scale: 1.01 }}
           whileTap={{ scale: 0.99 }}
-          onClick={() => WebApp.close()}
-          className="w-full bg-[#2AAB27] text-white text-lg font-medium px-6 py-4 rounded-xl shadow-sm hover:bg-opacity-90 transition-all mt-8"
+          onClick={() => navigate('/')}
+          className="w-full bg-primary text-white text-lg font-medium px-6 py-4 rounded-xl shadow-lg hover:bg-opacity-90 transition-all mt-8"
         >
-          ← Вернуться к боту
+          ← Вернуться к расчету
         </motion.button>
       </div>
-      <GetPhotoshootButton />
+
+      <div className="fixed bottom-4 left-0 right-0 px-4">
+        <div className="max-w-2xl mx-auto">
+          <motion.button
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
+            onClick={() => navigate('/payment')}
+            className="w-full bg-accent text-white text-lg font-medium px-6 py-4 rounded-xl shadow-xl hover:bg-opacity-90 transition-all"
+          >
+            Получить фотосессию
+          </motion.button>
+        </div>
+      </div>
     </motion.div>
   );
+}; 
 }; 

@@ -141,7 +141,7 @@ export const Calculator = () => {
             <div>
               <div className="flex justify-between items-center mb-2">
                 <label className="text-base font-medium text-gray-700">
-                  Потенциальный CTR с ИИ
+                  Вероятный CTR с ИИ
                 </label>
                 <div className="flex items-center space-x-2">
                   <span className="text-base font-medium text-accent">
